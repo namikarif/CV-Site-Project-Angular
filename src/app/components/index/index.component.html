@@ -1,0 +1,568 @@
+<div class="mobile-nav">
+  <button class="btn-mobile mobile-nav-close" (click)="toggleMenu()"><i class="icon icon-close"></i></button>
+  <div class="mobile-nav-inner">
+    <nav id="mobile-nav" class="nav">
+      <ul class="clearfix">
+        <li *ngIf="siteSettings.AboutMe == 1"><a href="#aboutMe">About Me</a></li>
+        <li *ngIf="siteSettings.Educations == 1 && educationsList.length > 0"><a href="#education">Education</a></li>
+        <li *ngIf="siteSettings.Skills == 1 && skillsList.length > 0"><a href="#skill">Skills</a></li>
+        <li *ngIf="siteSettings.Experiences == 1 && experiencesList.length > 0"><a href="#experiences">Experiences</a>
+        </li>
+        <li *ngIf="siteSettings.Awards == 1 && awardsList.length > 0"><a href="#awards">My Awards</a></li>
+        <li *ngIf="siteSettings.Projects == 1 && projectsList.length > 0"><a href="#projects">My Projects</a></li>
+        <li *ngIf="siteSettings.Blog == 1 && blogList.length > 0"><a href="#blogs">My Blog Post</a></li>
+        <li *ngIf="siteSettings.MyReferences == 1 && myReferencesList.length > 0"><a href="#references">References</a></li>
+        <li *ngIf="siteSettings.Message == 1"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="sidebar sidebar-fixed">
+  <button class="btn-sidebar btn-sidebar-close"><i class="icon icon-close"></i></button>
+  <div class="widget-area">
+    <aside class="widget widget-profile">
+      <div class="profile-photo">
+        <img src="../../../assets/images/profile.jpg" alt="{{generalInformation.NameSurname}}"/>
+      </div>
+      <div class="profile-info">
+        <h2 class="profile-title">{{generalInformation.NameSurname}}</h2>
+
+        <h3 class="profile-position">{{generalInformation.ShortText}}</h3>
+      </div>
+    </aside>
+    <aside *ngIf="siteSettings.Message" class="widget widget_contact">
+      <h2 class="widget-title">Contact me</h2>
+      <form class="rsForm" onsubmit="return false;" method="post">
+        <div class="input-field">
+          <label>Name Surname</label>
+          <input type="text" name="name" value="">
+          <span class="line"></span>
+        </div>
+        <div class="input-field">
+          <label>E-Mail</label>
+          <input type="email" name="email" value="">
+          <span class="line"></span>
+        </div>
+
+        <div class="input-field">
+          <label>Phone</label>
+          <input type="text" name="telephone" value="">
+          <span class="line"></span>
+        </div>
+
+        <div class="input-field">
+          <label>Message</label>
+          <textarea rows="4" name="message"></textarea>
+          <span class="line"></span>
+        </div>
+
+        <span class="btn-outer btn-primary-outer ripple">
+                        <input onclick="sendMessage2();" class="rsFormSubmit btn btn-lg btn-primary" type="submit"
+                               value="Send">
+                    </span>
+      </form>
+    </aside>
+  </div>
+</div>
+<div class="wrapper">
+  <header class="header">
+    <div class="head-bg" [style]="'background-image: url(' + baseUrl + '/assets/images/cover.jpg' + ')'"></div>
+    <div class="head-bar">
+      <div class="head-bar-inner">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="nav-wrap">
+              <nav id="nav" class="nav" header *ngIf="load">
+                <ul class="clearfix">
+                  <li *ngIf="siteSettings.AboutMe == 1"><a href="#aboutMe">About Me</a></li>
+                  <li *ngIf="siteSettings.Educations == 1 && educationsList.length > 0"><a
+                    href="#education">Education</a></li>
+                  <li *ngIf="siteSettings.Skills == 1 && skillsList.length > 0"><a href="#skill">Skills</a></li>
+                  <li *ngIf="siteSettings.Experiences == 1 && experiencesList.length > 0"><a href="#experiences">Experiences</a></li>
+                  <li *ngIf="siteSettings.Awards == 1 && awardsList.length > 0"><a href="#awards">My Awards</a></li>
+                  <li *ngIf="siteSettings.Projects == 1 && projectsList.length > 0"><a href="#projects">My Projects</a></li>
+                  <li *ngIf="siteSettings.Blog == 1 && blogList.length > 0"><a href="#blogs">My Blog Post</a></li>
+                  <li *ngIf="siteSettings.MyReferences == 1 && myReferencesList.length > 0"><a href="#references">References</a></li>
+                  <li *ngIf="siteSettings.Message == 1"><a href="#contact">Contact</a></li>
+                </ul>
+              </nav>
+
+              <button class="btn-mobile btn-mobile-nav" (click)="toggleMenu()">Menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="content">
+    <div class="container">
+      <section id="aboutMe" class="section section-about">
+        <div class="animate-up" naAppear>
+          <div class="section-box">
+            <div class="profile">
+              <div class="row">
+                <div class="col-xs-5">
+                  <div class="profile-photo">
+                    <img src="../../../assets/images/profile.jpg"
+                         alt="{{generalInformation.NameSurname}}"/>
+                  </div>
+                </div>
+                <div class="col-xs-7">
+                  <div class="profile-info">
+                    <div class="profile-preword">
+                      <span>{{generalInformation.HeaderText}}</span></div>
+                    <h1 class="profile-title">
+                      <span>I'm</span> {{generalInformation.NameSurname}}</h1>
+                    <h2 class="profile-position">{{generalInformation.ShortText}}</h2></div>
+                  <ul class="profile-list">
+                    <li class="clearfix">
+                      <strong class="title">Phone</strong>
+                      <span class="cont">
+                        <a [href]="'tel:' + generalInformation.Phone">{{generalInformation.Phone}}</a>
+                      </span>
+                    </li>
+                    <li class="clearfix">
+                      <strong class="title">Address</strong>
+                      <span class="cont">{{generalInformation.Address}}</span>
+                    </li>
+                    <li class="clearfix">
+                      <strong class="title">E-mail</strong>
+                      <span class="cont">
+                        <a href="mailto:<?= $GeneralInformation['EMail'] ?>">{{generalInformation.EMail}}</a>
+                      </span>
+                    </li>
+                    <li class="clearfix">
+                      <strong class="title">Birth Day</strong>
+                      <span class="cont">{{generalInformation.BirthDate}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="profile-social"
+                 *ngIf="generalInformation.Facebook || generalInformation.Twitter || generalInformation.Skype || generalInformation.Linkedin || generalInformation.Tumblr || generalInformation.Youtube || generalInformation.Instagram">
+              <ul class="social">
+                <li *ngIf="generalInformation.Facebook">
+                  <a class="ripple-centered"
+                     [href]="'https://www.facebook.com/' + generalInformation.Facebook"
+                     target="_blank">
+                    <i class="icon icon-facebook"></i>
+                  </a>
+                </li>
+                <li *ngIf="generalInformation.Twitter">
+                  <a class="ripple-centered" [href]="'https://www.twitter.com/' +generalInformation.Twitter"
+                     target="_blank">
+                    <i class="icon icon-twitter"></i>
+                  </a>
+                </li>
+                <li *ngIf="generalInformation.Instagram">
+                  <a class="ripple-centered" [href]="'https://www.instagram.com/' + generalInformation.Instagram"
+                     target="_blank"><i class="icon icon-instagram"></i>
+                  </a>
+                </li>
+                <li *ngIf="generalInformation.Skype">
+                  <!--                  <a class="ripple-centered"-->
+                  <!--                       onclick="swal(\'Skype\',\'' . $GeneralInformation['Skype'] . '\',\'success\');"-->
+                  <!--                       title="' . $GeneralInformation['Skype'] . '"-->
+                  <!--                       href="skype:' . $GeneralInformation['Skype'] . '?' . $GeneralInformation['SkypeConnectionType'] . '"><i-->
+                  <!--                  class="icon icon-skype"></i></a>-->
+                </li>
+                <li *ngIf="generalInformation.Tumblr">
+                  <a class="ripple-centered" [href]="'https://' + generalInformation.Tumblr + '.tumblr.com'"
+                     target="_blank">
+                    <i class="icon icon-tumblr"></i>
+                  </a>
+                </li>
+                <li *ngIf="generalInformation.Youtube">
+                  <a class="ripple-centered" [href]="'https://www.youtube.com/' + generalInformation.Youtube"
+                     target="_blank">
+                    <i class="icon icon-youtube"></i>
+                  </a>
+                </li>
+                <li *ngIf="generalInformation.Linkedin">
+                  <a class="ripple-centered"
+                     [href]="'https://www.linkedin.com/in/' + generalInformation.Linkedin" target="_blank">
+                    <i class="icon icon-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="section-txt-btn">
+            <p [innerHTML]="generalInformation.AboutMe"></p>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Educations && educationsList.length > 0" id="education"
+               class="section section-education">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">Education</h2>
+          <div class="timeline" timeline>
+            <div class="timeline-bar"></div>
+            <div class="timeline-inner clearfix">
+              <div *ngFor="let edu of educationsList; let i = index"
+                   [class]="'timeline-box timeline-box-compact timeline-box-' + (i % 2 === 0 ? 'left' : 'right')">
+                <span class="dot"></span>
+                <div [class]="'timeline-box-inner animate-' + (i % 2 === 0 ? 'right' : 'left')">
+                  <span class="arrow"></span>
+
+                  <div class="date"><span>Continues</span></div>
+                  <h3>{{edu.SchoolName}}</h3>
+                  <h4>{{edu.Department}}</h4>
+                </div>
+              </div>
+              <div *ngFor="let edu of educationsList; let i = index"
+                   [class]="'timeline-box timeline-box-compact timeline-box-' + (i % 2 === 0 ? 'left' : 'right')">
+                <span class="dot"></span>
+
+                <div [class]="'timeline-box-inner animate-' + (i % 2 === 0 ? 'right' : 'left')">
+                  <span class="arrow"></span>
+
+                  <div class="date">
+                    <span>{{edu.GraduatedYear}}</span>
+                  </div>
+                  <h3>{{edu.SchoolName}}</h3>
+                  <h4>{{edu.Department}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Skills == 1 && skillsList.length > 0" id="skill" class="section section-skill">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">Skills</h2>
+          <div class="section-box">
+            <div class="row">
+              <div class="col-sm-6" *ngFor="let skill of skillsList">
+                <div class="progress-bar" skillsWidth>
+                  <div class="bar-data">
+                    <span class="bar-title">{{skill.SkillDescription}}</span>
+                    <span class="bar-value">{{skill.Percent}}%</span>
+                  </div>
+                  <div class="bar-line">
+                    <span class="bar-fill" data-width="{{skill.Percent}}"
+                          [ngStyle]="{'width': skill.Percent + '%'}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Experiences == 1 && experiencesList.length > 0" id="experiences"
+               class="section section-experience">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">Experiences</h2>
+          <div class="timeline" timeline>
+            <div class="timeline-bar"></div>
+            <div class="timeline-inner clearfix">
+              <div *ngFor="let experience of experiencesList; let i = index"
+                   [class]="'timeline-box timeline-box-' + (i % 2 === 1 ? 'left' : 'right')">
+                <span class="dot"></span>
+
+                <div [class]="'timeline-box-inner animate-' + (i % 2 === 1 ? 'right' : 'left')">
+                  <span class="arrow"></span>
+
+                  <div class="date">
+                    {{changeMonthToString(experience.StartMonth)}} {{experience.StartYear}} {{(experience.EndMonth || experience.EndYear > 0) ? (changeMonthToString(experience.EndMonth) + ' ' + experience.EndYear) : 'Continues' }}
+                  </div>
+                  <h3>{{experience.CompanyName}}</h3>
+                  <h4>{{experience.CompanyDescription}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Awards == 1 && awardsList.length > 0" id="awards" class="section section-experience">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">My Awards</h2>
+          <div class="timeline" timeline>
+            <div class="timeline-bar"></div>
+            <div class="timeline-inner clearfix">
+              <div *ngFor="let award of awardsList; let i = index"
+                   [class]="'timeline-box timeline-box-' + (i % 2 === 1 ? 'left' : 'right')">
+                <span class="dot"></span>
+                <div [class]="'timeline-box-inner animate-' + (i % 2 === 1 ? 'right' : 'left')">
+                  <span class="arrow"></span>
+                  <div class="date">{{award.AwardDescription}}</div>
+                  <h3>{{award.AwardYear}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Projects == 1 && projectsList.length > 0" id="projects"
+               class="section section-portfolio">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">Projects</h2>
+          <div class="filter">
+            <div class="filter-inner">
+              <div class="filter-btn-group">
+                <button *ngFor="let category of projectCategories"
+                        data-filter=".kat'{{category.CategoryID}}">{{category.CategoryName}}</button>
+              </div>
+              <div class="filter-bar">
+                <span class="filter-bar-line"></span>
+              </div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="grid-sizer"></div>
+            <div *ngFor="let project of projectsList" class="grid-item size11 kat'{{project.CategoryID}}">
+              <div class="grid-box">
+                <figure class="portfolio-figure">
+                  <img src="{{baseUrl}}/assets/images/projects/p{{project.ProjectID}}.jpg"
+                       alt="{{project.ProjectName}}"/>
+                  <figcaption class="portfolio-caption">
+                    <div class="portfolio-caption-inner">
+                      <h3 class="portfolio-title">{{project.ProjectName}}</h3>
+                      <h4 class="portfolio-cat">{{project.ShortDescription}}</h4>
+                      <div class="btn-group">
+                        <a class="portfolioFancybox btn-zoom" data-fancybox-group="portfolioFancybox2"
+                           href="#projectDetail{{project.ProjectID}}">
+                          <i class="icon icon-eye"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </figcaption>
+                </figure>
+                <div id="projectDetail{{project.ProjectID}}" class="fancybox-inline-box">
+                  <div class="inline-embed" data-embed-type="image"
+                       data-embed-url="{{baseUrl}}/assets/images/projects/p{{project.ProjectID}}.jpg"></div>
+                  <div class="inline-cont">
+                    <h2 class="inline-title">{{project.ProjectName}}</h2>
+
+                    <div class="inline-text">
+                      <div [innerHTML]="project.LongDescription"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Blog == 1 && blogList.length > 0" id="blogs" class="section section-blog">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">My Blog Post</h2>
+          <div class="blog-grid">
+            <div class="grid-sizer"></div>
+            <div class="blog-carousel">
+              <div *ngFor="let blog of blogList" class="grid-item">
+                <article class="post-box">
+                  <div class="post-media">
+                    <div class="post-image">
+                      <a class="portfolioFancybox" routerLink="blog/{{blog.BlogID}}">
+                        <img src="assets/images/blog/b{{blog.BlogID}}.jpg" alt="{{blog.BlogTitle}}">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="post-data">
+                    <time class="post-datetime" datetime="' . $blogPostList['Date'] . '">
+                      <span class="day">{{blog.Date | date : 'd MMM'}}</span>
+                      <span class="month">{{getMonths(blog.Date)}}</span>
+                    </time>
+                    <h3 class="post-title">
+                      <a class="portfolioFancybox" href="blog/{{blog.BlogID}}">
+                        <span [innerHTML]="blog.BlogTitle"></span>
+                      </a>
+                    </h3>
+                    <div class="post-info">
+                      <p [innerHTML]="blog.BlogShortDescription"></p>
+                    </div>
+                    <div class="post-info">
+                      <a>
+                        <i class="icon icon-eye"></i>{{blog.Hint}}
+                      </a>
+                      <a>
+                        <i class="icon icon-comments"></i>{{blog.COMMENTS.length}}
+                      </a>
+                    </div>
+                    <div *ngIf="blog.BlogLongDescription" class="post-tag">
+                      <a class="portfolioFancybox" href="blog/{{blog.BlogID}}">
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </article>
+                <div *ngIf="blog.BlogLongDescription" id="blog-detay'{{blog.BlogID}}" class="fancybox-inline-box">
+                  <div class="inline-embed" data-embed-type="image"
+                       data-embed-url="assets/images/blog/b{{blog.BlogID}}.jpg"></div>
+                  ';
+                  <div class="inline-cont">
+                    <h2 class="inline-title">{{blog.BlogTitle}}</h2>
+                    <div class="inline-text">
+                      <p>{{blog.BlogLongDescription}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.MyReferences == 1 && myReferencesList.length > 0" id="references"
+               class="section section-clients">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">References</h2>
+          <div class="clients-carousel">
+            <div *ngFor="let reference of myReferencesList" class="client-logo">
+              <a *ngIf="reference.URL" href="{{reference.URL}}" target="_blank">
+                <img src="{{baseUrl}}/assets/images/reference/r{{reference.ReferenceID}}.jpg"
+                     title="{{reference.ReferenceName}}"
+                     alt="{{reference.ReferenceName}}"/></a>
+              <img *ngIf="!reference.URL" src="{{baseUrl}}/assets/images/reference/r{{reference.ReferenceID}}.jpg"
+                   title="{{reference.ReferenceName}}"
+                   alt="{{reference.ReferenceName}}"/>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section *ngIf="siteSettings.Message == 1" id="contact" class="section section-contact">
+        <div class="animate-up" naAppear>
+          <h2 class="section-title">Contact me</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="section-box contact-form">
+                <h3>{{generalInformation.NameSurname}}</h3>
+
+                <form class="rsForm" #ContactForm="ngForm" novalidate>
+                  <div class="input-field">
+                    <label for="sname">Name Surname</label>
+                    <input type="text"
+                           name="sname"
+                           id="sname"
+                           required
+                           [(ngModel)]="message.name">
+                    <span class="line"></span>
+                  </div>
+
+                  <div class="input-field">
+                    <label for="semail">E-Mail</label>
+                    <input type="email"
+                           name="semail"
+                           id="semail"
+                           required
+                           [(ngModel)]="message.email">
+                    <span class="line"></span>
+                  </div>
+
+                  <div class="input-field">
+                    <label for="phone">Phone</label>
+                    <input type="text"
+                           name="phone"
+                           id="phone"
+                           [(ngModel)]="message.phone">
+                    <span class="line"></span>
+                  </div>
+
+                  <div class="input-field">
+                    <label for="message">Message</label>
+                    <textarea rows="4"
+                              name="message"
+                              id="message"
+                              [(ngModel)]="message.message">
+                    </textarea>
+                    <span class="line"></span>
+                  </div>
+
+                  <span class="btn-outer btn-primary-outer ripple">
+                    <input (click)="sendMessage();"
+                           class="rsFormSubmit btn btn-lg btn-primary"
+                           value="Send">
+                  </span>
+                </form>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="section-box contact-info has-map">
+                <ul class="contact-list">
+                  <li class="clearfix">
+                    <strong>Address</strong>
+                    <span>{{generalInformation.Address}}</span>
+                  </li>
+                  <li class="clearfix">
+                    <strong>Phone</strong>
+                    <span>
+                      <a href="tel:{{generalInformation.Phone}}">{{generalInformation.Phone}}</a>
+                    </span>
+                  </li>
+                  <li class="clearfix">
+                    <strong>E-Mail</strong>
+                    <span>
+                      <a href="mailto:{{generalInformation.EMail}}">{{generalInformation.EMail}}</a>
+                    </span>
+                  </li>
+                </ul>
+                <div id="map" *ngIf="explode(generalInformation.GoogleMap, ',')[0]"
+                     data-latitude="{{explode(generalInformation.GoogleMap, ',')[0]}}"
+                     data-longitude="{{explode(generalInformation.GoogleMap, ',')[1]}}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="footer">
+    <div
+      *ngIf="generalInformation.Facebook || generalInformation.Twitter || generalInformation.Skype || generalInformation.Linkedin || generalInformation.Tumblr || generalInformation.Youtube || generalInformation.Instagram"
+      class="footer-social">
+      <ul class="social">
+        <li *ngIf="generalInformation.Facebook">
+          <a class="ripple-centered"
+             [href]="'https://www.facebook.com/' + generalInformation.Facebook"
+             target="_blank">
+            <i class="icon icon-facebook"></i>
+          </a>
+        </li>
+        <li *ngIf="generalInformation.Twitter">
+          <a class="ripple-centered" [href]="'https://www.twitter.com/' +generalInformation.Twitter"
+             target="_blank">
+            <i class="icon icon-twitter"></i>
+          </a>
+        </li>
+        <li *ngIf="generalInformation.Instagram">
+          <a class="ripple-centered" [href]="'https://www.instagram.com/' + generalInformation.Instagram"
+             target="_blank"><i class="icon icon-instagram"></i>
+          </a>
+        </li>
+        <li *ngIf="generalInformation.Skype">
+          <!--                  <a class="ripple-centered"-->
+          <!--                       onclick="swal(\'Skype\',\'' . $GeneralInformation['Skype'] . '\',\'success\');"-->
+          <!--                       title="' . $GeneralInformation['Skype'] . '"-->
+          <!--                       href="skype:' . $GeneralInformation['Skype'] . '?' . $GeneralInformation['SkypeConnectionType'] . '"><i-->
+          <!--                  class="icon icon-skype"></i></a>-->
+        </li>
+        <li *ngIf="generalInformation.Tumblr">
+          <a class="ripple-centered" [href]="'https://' + generalInformation.Tumblr + '.tumblr.com'"
+             target="_blank">
+            <i class="icon icon-tumblr"></i>
+          </a>
+        </li>
+        <li *ngIf="generalInformation.Youtube">
+          <a class="ripple-centered" [href]="'https://www.youtube.com/' + generalInformation.Youtube"
+             target="_blank">
+            <i class="icon icon-youtube"></i>
+          </a>
+        </li>
+        <li *ngIf="generalInformation.Linkedin">
+          <a class="ripple-centered"
+             [href]="'https://www.linkedin.com/in/' + generalInformation.Linkedin" target="_blank">
+            <i class="icon icon-linkedin"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<a class="btn-scroll-top" href="#"><i class="icon icon-arrow-up"></i></a>
+<div id="overlay"></div>
+<div id="preloader">
+  <div class="preload-icon"><span></span><span></span></div>
+  <div class="preload-text">Loading...</div>
+</div>
